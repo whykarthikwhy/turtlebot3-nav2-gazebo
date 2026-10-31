@@ -1,0 +1,16 @@
+# colcon / ROS build output
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Generated / local files
+frames_*.pdf
+frames_*.gv
+*.mp4
+*.mkv
+.vscode/
