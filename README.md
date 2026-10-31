@@ -2,7 +2,7 @@
 
 A TurtleBot3 Burger navigates autonomously to goals in a Gazebo world while avoiding obstacles, using the Nav2 stack, AMCL localisation and a map built with SLAM Toolbox.
 
-**Demo video:** <PASTE LINK HERE>
+**Demo video:** https://drive.google.com/file/d/1TCPS0_3zTSQef8gqoGVi2J_jiXgR5kHB/view?usp=sharing
 
 ## Tested on
 - Ubuntu 24.04, ROS 2 Jazzy, Gazebo Sim 8 (Harmonic), Nav2 1.3.x
@@ -17,10 +17,25 @@ sudo apt install -y ros-jazzy-navigation2 ros-jazzy-nav2-bringup \
 ## Build
 ```bash
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
-git clone <REPO_URL> auto_nav_antropi
+git clone https://github.com/whykarthikwhy/turtlebot3-nav2-gazebo.git auto_nav_antropi
 cd ~/ros2_ws
 colcon build --symlink-install
 source install/setup.bash
+```
+
+## Environment setup (every new terminal)
+```bash
+source ~/ros2_ws/install/setup.bash
+export TURTLEBOT3_MODEL=burger
+export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$(ros2 pkg prefix auto_nav_antropi)/share/auto_nav_antropi/models
+```
+- `TURTLEBOT3_MODEL=burger` selects the TurtleBot3 Burger variant used by the TurtleBot3 packages.
+- `GZ_SIM_RESOURCE_PATH` tells Gazebo Harmonic where to find this package's `models/` folder, so `model://` references in the world file resolve.
+
+To make this permanent:
+```bash
+echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
+echo 'export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:$(ros2 pkg prefix auto_nav_antropi)/share/auto_nav_antropi/models' >> ~/.bashrc
 ```
 
 ## Run: autonomous navigation
